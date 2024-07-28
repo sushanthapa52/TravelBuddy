@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace TravelBuddy.Models
 {
-    internal class Activity
+    public class Activity
     {
+        public string Camping { get; set; }
+
+        public string Swimming { get; set; }
+
+        public string Canoeing { get; set; }
     }
 }
