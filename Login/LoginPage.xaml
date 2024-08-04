@@ -6,7 +6,7 @@
     <StackLayout>
         <Entry x:Name="emailEntry" Text="{Binding Email}" Placeholder="Email" />
         <Entry x:Name="passwordEntry" Text="{Binding Password}" Placeholder="Password" IsPassword="True" />
-        <Button Text="Login" Command="{Binding LoginCommand}" />
+        <Button Text="Login" Clicked="OnLoginClicked" />
         <Label Text="{Binding LoginResult}" />
     </StackLayout>
 </ContentPage>

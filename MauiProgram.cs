@@ -35,7 +35,7 @@ namespace TravelBuddy
             builder.Services.AddSingleton<FirebaseAuthentication>();
             builder.Services.AddTransient<LoginViewModel>();
             builder.Services.AddTransient<LoginPage>();
-            //builder.Services.AddTransient<HomePage>(); // Register HomePage
+            builder.Services.AddTransient<HomePage>(); // Register HomePage
 
 
 

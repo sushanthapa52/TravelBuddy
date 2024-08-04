@@ -15,7 +15,6 @@ namespace TravelBuddy.Login
         private string _email;
         private string _password;
         private string _loginResult;
-        private readonly INavigation _navigation;
 
         public LoginViewModel(FirebaseAuthentication authService)
         {
@@ -58,9 +57,9 @@ namespace TravelBuddy.Login
             var token = await _authService.LoginWithEmailPassword(Email, Password);
             if (token != null)
             {
-                LoginResult = "Login successful";
+                //LoginResult = "Login successful";
                 // Navigate to HomePage using Shell
-                await Shell.Current.GoToAsync("home");
+                await Shell.Current.GoToAsync($"///{nameof(HomePage)}");
 
             }
             else

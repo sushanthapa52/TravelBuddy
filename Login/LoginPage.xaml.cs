@@ -1,3 +1,5 @@
+using System.ComponentModel;
+
 namespace TravelBuddy.Login;
 
 public partial class LoginPage : ContentPage
