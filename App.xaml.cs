@@ -1,12 +1,18 @@
-﻿namespace TravelBuddy
+﻿
+using TravelBuddy.Login;
+
+namespace TravelBuddy
 {
     public partial class App : Application
     {
-        public App()
+        public App(IServiceProvider serviceProvider)
         {
             InitializeComponent();
 
-            MainPage = new AppShell();
+
+            // Resolve the LoginPage using the service provider
+            var loginPage = serviceProvider.GetRequiredService<LoginPage>();
+            MainPage = new NavigationPage(loginPage);
         }
     }
 }
