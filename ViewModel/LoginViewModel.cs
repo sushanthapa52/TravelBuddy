@@ -5,8 +5,10 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using TravelBuddy.Service;
+using TravelBuddy.Views;
 
-namespace TravelBuddy.Login
+namespace TravelBuddy.ViewModel
 {
     public class LoginViewModel : INotifyPropertyChanged
     {

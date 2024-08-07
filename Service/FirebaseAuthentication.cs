@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TravelBuddy
+namespace TravelBuddy.Service
 {
     public class FirebaseAuthentication
     {

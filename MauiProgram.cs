@@ -2,7 +2,9 @@
 using Firebase.Auth.Repository;
 using Firebase.Auth;
 using Microsoft.Extensions.Logging;
-using TravelBuddy.Login;
+using TravelBuddy.ViewModel;
+using TravelBuddy.Service;
+using TravelBuddy.Views;
 
 namespace TravelBuddy
 {
@@ -34,6 +36,7 @@ namespace TravelBuddy
             }));
             builder.Services.AddSingleton<FirebaseAuthentication>();
             builder.Services.AddTransient<LoginViewModel>();
+            builder.Services.AddTransient<HomePageViewModel>();
             builder.Services.AddTransient<LoginPage>();
             builder.Services.AddTransient<HomePage>(); // Register HomePage
 

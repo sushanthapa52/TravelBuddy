@@ -1,7 +1,7 @@
 using System.ComponentModel;
+using TravelBuddy.ViewModel;
 
-namespace TravelBuddy.Login;
-
+namespace TravelBuddy.Views;
 public partial class LoginPage : ContentPage
 {
     private LoginViewModel _viewModel;
@@ -13,7 +13,7 @@ public partial class LoginPage : ContentPage
         BindingContext = _viewModel;
     }
 
-    private async void OnLoginClicked(object sender, EventArgs e)
+    public async void OnLoginClicked(object sender, EventArgs e)
     {
         var email = emailEntry.Text;
         var password = passwordEntry.Text;
