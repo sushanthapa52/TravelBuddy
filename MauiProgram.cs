@@ -40,6 +40,9 @@ namespace TravelBuddy
             builder.Services.AddTransient<LoginPage>();
             builder.Services.AddTransient<HomePage>(); // Register HomePage
 
+           builder.Services.AddSingleton<FirestoreService>();
+
+
 
 
 

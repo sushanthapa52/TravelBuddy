@@ -18,6 +18,7 @@
                            FontSize="16"
                            TextColor="#333"
                            BackgroundColor="White"
+                           Text="{Binding TripName}"
                            HeightRequest="40" />
                 </StackLayout>
             </Frame>
@@ -67,13 +68,13 @@
                 <Button Text="Reset"
                         BackgroundColor="Red"
                         TextColor="White"
-                        
+                        Command="{Binding ResetCommand}"
                         WidthRequest="100"
                         CornerRadius="5" />
                 <Button Text="Save"
                         BackgroundColor="Blue"
                         TextColor="White"
-                        
+                        Command="{Binding SaveCommand}"
                         WidthRequest="100"
                         CornerRadius="5" />
             </StackLayout>
