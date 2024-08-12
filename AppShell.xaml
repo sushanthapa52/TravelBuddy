@@ -15,4 +15,7 @@
      Title="Home"
      ContentTemplate="{DataTemplate local:HomePage}"
      Route="HomePage" />
+
+    <ShellContent Route="ChecklistPage" ContentTemplate="{DataTemplate local:ChecklistPage}" />
+
 </Shell>

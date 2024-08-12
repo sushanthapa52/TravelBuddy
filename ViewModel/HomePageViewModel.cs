@@ -80,6 +80,9 @@ namespace TravelBuddy.ViewModel
             {
                 await _firestoreService.SaveUserActivityAsync(userId, tripDetails);
                 await Application.Current.MainPage.DisplayAlert("Success", "Trip details saved successfully!", "OK");
+                // redirect into new page listing all the details
+                await Shell.Current.GoToAsync($"///ChecklistPage?userId={userId}&tripName={TripName}&tripDate={TripDate}&activityType={activity}");
+
             }
             catch (Exception ex)
             {
@@ -104,6 +107,8 @@ namespace TravelBuddy.ViewModel
                     return "Canoeing";
                 case 2:
                     return "Camping";
+                case 3:
+                    return "Hiking";
                 default:
                     return null;
             }

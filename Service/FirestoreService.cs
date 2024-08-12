@@ -7,6 +7,7 @@ using Firebase.Auth;
 using Firebase.Database;
 using Firebase.Database.Query;
 using Google.Cloud.Firestore;
+using TravelBuddy.Entities;
 
 
 namespace TravelBuddy.Service
@@ -68,6 +69,13 @@ namespace TravelBuddy.Service
                 .PutAsync(activity);
 
 
+        }
+        public async Task SaveSelectedItemsAsync(string userId, List<string> selectedItems)
+        {
+            await _firebaseClient
+                .Child("UserChecklists")
+                .Child(userId)
+                .PutAsync(selectedItems);
         }
         //public async Task<string> GetAuthTokenAsync()
         //{
