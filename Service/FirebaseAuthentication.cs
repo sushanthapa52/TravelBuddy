@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TravelBuddy
+namespace TravelBuddy.Service
 {
     public class FirebaseAuthentication
     {
@@ -22,7 +22,10 @@ namespace TravelBuddy
             try
             {
                 var userCredential = await _authClient.SignInWithEmailAndPasswordAsync(email, password);
-                return userCredential.User?.GetIdTokenAsync().ToString();
+                //var userID = userCredential.User.Uid;
+
+                return userCredential.User.Uid;
+                //return userCredential.User?.GetIdTokenAsync().ToString();
             }
             catch (Exception ex)
             {

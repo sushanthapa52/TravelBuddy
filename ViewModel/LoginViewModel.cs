@@ -5,22 +5,24 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using TravelBuddy.Service;
+using TravelBuddy.Views;
 
-namespace TravelBuddy.Login
+namespace TravelBuddy.ViewModel
 {
     public class LoginViewModel : INotifyPropertyChanged
     {
-        private readonly FirebaseAuthentication _authService;
 
         private string _email;
         private string _password;
         private string _loginResult;
-        private readonly INavigation _navigation;
+        private readonly FirestoreService _firestoreService;
+        private readonly FirebaseAuthentication _authService;
+
 
         public LoginViewModel(FirebaseAuthentication authService)
         {
             _authService = authService;
-
         }
 
         public string Email
@@ -56,12 +58,12 @@ namespace TravelBuddy.Login
         public async Task Login(string Email, string Password)
         {
             var token = await _authService.LoginWithEmailPassword(Email, Password);
+            
             if (token != null)
             {
-                LoginResult = "Login successful";
-                // Navigate to HomePage using Shell
-                await Shell.Current.GoToAsync("home");
 
+             await Shell.Current.GoToAsync($"///{nameof(HomePage)}?token={token}");
+                    
             }
             else
             {

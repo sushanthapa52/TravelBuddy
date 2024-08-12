@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TravelBuddy.Views.ChecklistPage"
+             xmlns:vm="clr-namespace:TravelBuddy.ViewModel"
+             Title="ChecklistPage">
+    <ContentPage.BindingContext>
+        <vm:ChecklistViewModel />
+    </ContentPage.BindingContext>
+
+    <StackLayout Padding="20">
+        <Label Text="{Binding TripName}" FontSize="24" FontAttributes="Bold" />
+        <Label Text="{Binding TripDate}" FontSize="24" FontAttributes="Bold" />
+        <Label Text="{Binding Category}" FontSize="24" FontAttributes="Bold" />
+
+
+
+        <ListView ItemsSource="{Binding Items}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" Padding="10">
+                            <Label Text="{Binding Name}" VerticalOptions="Center" />
+                            <Switch IsToggled="{Binding IsSelected}" VerticalOptions="Center" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Button Text="Save" Command="{Binding SaveCommand}" BackgroundColor="Blue" TextColor="White" />
+    </StackLayout>
+</ContentPage>

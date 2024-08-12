@@ -1,5 +1,4 @@
 ﻿
-using TravelBuddy.Login;
 
 namespace TravelBuddy
 {
@@ -10,9 +9,10 @@ namespace TravelBuddy
             InitializeComponent();
 
 
-            // Resolve the LoginPage using the service provider
-            var loginPage = serviceProvider.GetRequiredService<LoginPage>();
-            MainPage = new NavigationPage(loginPage);
+            //// Resolve the LoginPage using the service provider
+            //var loginPage = serviceProvider.GetRequiredService<LoginPage>();
+            //MainPage = new NavigationPage(loginPage);
+            MainPage = new AppShell();
         }
     }
 }

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TravelBuddy.Views.LoginPage"
+             Title="Plan your trip with Travel Buddy"
+             BackgroundColor="#F4F4F4"
+             Padding="20">
+
+    <StackLayout Spacing="20">
+        <!-- Title -->
+        <Label Text="Please login!"
+               FontSize="24"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"
+               TextColor="#333" />
+
+        <!-- Email Entry -->
+        <Frame BackgroundColor="White"
+               CornerRadius="10"
+               Padding="10"
+               HasShadow="True">
+            <Entry x:Name="emailEntry"
+                   Text="{Binding Email}"
+                   Placeholder="Email"
+                   FontSize="16"
+                   TextColor="#333"
+                   Keyboard="Email"
+                   HeightRequest="50" />
+        </Frame>
+
+        <!-- Password Entry -->
+        <Frame BackgroundColor="White"
+               CornerRadius="10"
+               Padding="10"
+               HasShadow="True">
+            <Entry x:Name="passwordEntry"
+                   Text="{Binding Password}"
+                   Placeholder="Password"
+                   IsPassword="True"
+                   FontSize="16"
+                   TextColor="#333"
+                   HeightRequest="50" />
+        </Frame>
+
+        <!-- Login Button -->
+        <Button Text="Login"
+                Clicked="OnLoginClicked"
+                BackgroundColor="#007BFF"
+                TextColor="White"
+                FontSize="16"
+                CornerRadius="10"
+                HeightRequest="50" />
+
+    </StackLayout>
+</ContentPage>
