@@ -83,6 +83,23 @@ namespace TravelBuddy.Service
         //    return await user.GetIdTokenAsync();
         //}
 
+        public async Task SaveChecklistAsync(string userId, string activity, Dictionary<string, bool> checklist)
+        {
+            await _firebaseClient
+                .Child("UserChecklists")
+                .Child(userId)
+                .Child(activity)
+                .PutAsync(checklist);
+        }
+        public async Task<List<string>> GetUserChecklistAsync(string userId)
+        {
+            var result = await _firebaseClient
+                   .Child("UserChecklists")
+                   .Child(userId)
+                   .OnceSingleAsync<List<string>>(); // Deserialize the JSON array to a List<string>
+
+            return result;
+        }
 
 
     }

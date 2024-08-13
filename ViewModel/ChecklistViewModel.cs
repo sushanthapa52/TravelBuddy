@@ -19,7 +19,7 @@ namespace TravelBuddy.ViewModel
 
         public string TripName;
         public DateTime TripDate;
-        public string Category;
+        public string ActivityType;
 
         public ChecklistViewModel()
         {
@@ -29,12 +29,16 @@ namespace TravelBuddy.ViewModel
         {
             _firestoreService = firestoreService;
             SaveCommand = new Command(OnSaveClicked);
-            OnLoadItems("Hiking");
+            SignOutCommand = new Command(OnSignOutClicked);
+
+            //OnLoadItems("Hiking");
         }
 
         public ObservableCollection<ChecklistItem> Items { get; } = new ObservableCollection<ChecklistItem>();
 
         public ICommand SaveCommand { get; }
+        public ICommand SignOutCommand { get; }
+
         public ICommand LoadItemsCommand { get; }
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)
@@ -42,19 +46,41 @@ namespace TravelBuddy.ViewModel
             if (query.ContainsKey("userId"))
             {
                 _token = query["userId"] as string;
+            }
+
+            if (query.ContainsKey("tripName"))
+            {
                 TripName = query["tripName"] as string;
-                Category = query["activityType"] as string ?? string.Empty;
-                if (DateTime.TryParse(query["tripDate"] as string, out DateTime parsedDate))
-                {
-                    TripDate = parsedDate;
-                }
+            }
 
+            if (query.ContainsKey("activityType"))
+            {
+                ActivityType = query["activityType"] as string ?? string.Empty;
+            }
 
+            if (query.ContainsKey("tripDate") && DateTime.TryParse(query["tripDate"] as string, out DateTime parsedDate))
+            {
+                TripDate = parsedDate;
+            }
+
+            if (query.ContainsKey("checklist"))
+            {
+                var checklist = query["checklist"] as List<string>; // Assuming the checklist is passed as a List<string>
+
+                // You can now process the checklist as needed, e.g., assign it to a property:
+            }
+
+            // Call OnLoadItems after query parameters are processed
+            if (!string.IsNullOrEmpty(ActivityType))
+            {
+                OnLoadItems(ActivityType);
             }
         }
+
         private void OnLoadItems(string activityType)
         {
             Items.Clear();
+
 
             if (activityType == "Hiking")
             {
@@ -76,6 +102,12 @@ namespace TravelBuddy.ViewModel
             await _firestoreService.SaveSelectedItemsAsync(userId, selectedItems);
 
             await Application.Current.MainPage.DisplayAlert("Success", "Checklist saved successfully!", "OK");
+        }
+        private async void OnSignOutClicked()
+        {
+            // Perform any necessary sign out logic here
+            // Navigate to the login page
+            await Shell.Current.GoToAsync("//LoginPage");
         }
     }
 

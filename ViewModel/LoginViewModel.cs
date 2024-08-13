@@ -20,9 +20,10 @@ namespace TravelBuddy.ViewModel
         private readonly FirebaseAuthentication _authService;
 
 
-        public LoginViewModel(FirebaseAuthentication authService)
+        public LoginViewModel(FirebaseAuthentication authService, FirestoreService firestoreService)
         {
             _authService = authService;
+            _firestoreService = firestoreService;
         }
 
         public string Email
@@ -58,18 +59,30 @@ namespace TravelBuddy.ViewModel
         public async Task Login(string Email, string Password)
         {
             var token = await _authService.LoginWithEmailPassword(Email, Password);
-            
-            if (token != null)
-            {
 
-             await Shell.Current.GoToAsync($"///{nameof(HomePage)}?token={token}");
-                    
+
+            // Check if the user has a checklist in the database
+            var userChecklist = await _firestoreService.GetUserChecklistAsync(token);
+
+            if (userChecklist != null)
+            {
+                // Redirect to the ChecklistPage with the checklist data
+                //var navigationParameters = new Dictionary<string, object>
+                //{
+                //    { "token", token },
+                //    { "checklist", userChecklist }
+                //};
+               // await Shell.Current.GoToAsync($"///{nameof(ExistingChecklistPage)}", navigationParameters);
+                await Shell.Current.GoToAsync($"///{nameof(ExistingChecklistPage)}");
+
+
             }
             else
             {
-                LoginResult = "Login failed";
-                // Handle login failure
+                await Shell.Current.GoToAsync($"///{nameof(HomePage)}?token={token}");
+
             }
+            
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

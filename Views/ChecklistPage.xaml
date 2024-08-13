@@ -11,7 +11,7 @@
     <StackLayout Padding="20">
         <Label Text="{Binding TripName}" FontSize="24" FontAttributes="Bold" />
         <Label Text="{Binding TripDate}" FontSize="24" FontAttributes="Bold" />
-        <Label Text="{Binding Category}" FontSize="24" FontAttributes="Bold" />
+        <Label Text="{Binding ActivityType}" FontSize="24" FontAttributes="Bold" />
 
 
 
@@ -29,5 +29,11 @@
         </ListView>
 
         <Button Text="Save" Command="{Binding SaveCommand}" BackgroundColor="Blue" TextColor="White" />
+
+        <!-- Sign Out Button -->
+        <Button Text="Sign Out" 
+                BackgroundColor="Red" 
+                TextColor="White" 
+                Command="{Binding SignOutCommand}" />
     </StackLayout>
 </ContentPage>

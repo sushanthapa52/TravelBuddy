@@ -38,13 +38,14 @@ namespace TravelBuddy
             builder.Services.AddTransient<LoginViewModel>();
             builder.Services.AddTransient<HomePageViewModel>();
             builder.Services.AddTransient<ChecklistViewModel>();
+            builder.Services.AddTransient<ExistingChecklistVIewModel>();
             builder.Services.AddTransient<LoginPage>();
             builder.Services.AddTransient<HomePage>(); // Register HomePage
             builder.Services.AddTransient<ChecklistPage>();
+            builder.Services.AddTransient<ExistingChecklistPage>();
 
            builder.Services.AddSingleton<FirestoreService>();
-
-
+           
             return builder.Build();
         }
     }

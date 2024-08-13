@@ -17,5 +17,6 @@
      Route="HomePage" />
 
     <ShellContent Route="ChecklistPage" ContentTemplate="{DataTemplate local:ChecklistPage}" />
+    <ShellContent Route="ExistingChecklistPage" ContentTemplate="{DataTemplate local:ExistingChecklistPage}" />
 
 </Shell>
