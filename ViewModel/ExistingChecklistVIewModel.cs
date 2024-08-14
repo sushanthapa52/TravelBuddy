@@ -36,11 +36,16 @@ namespace TravelBuddy.ViewModel
 
             // Call the LoadChecklistAsync method
             SelectedActivityChecklist = new ObservableCollection<ChecklistItem>();
+
+            SaveChecklistCommand = new Command(async () => await SaveChecklistAsync());
+
             SignOutCommand = new Command(OnSignOutClicked);
 
 
         }
         public ICommand SignOutCommand { get; }
+        public ICommand SaveChecklistCommand { get; }
+
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)
         {
@@ -121,11 +126,14 @@ namespace TravelBuddy.ViewModel
             await Shell.Current.GoToAsync("//LoginPage");
         }
 
-        // Call this method to save the updated checklist back to Firebase
-        //public async Task SaveChecklistAsync()
-        //{
-        //    var updatedChecklist = SelectedActivityChecklist.Select(c => c.Name).ToList();
-        //    await _firestoreService.SaveUserChecklistAsync(_userId, updatedChecklist);
-        //}
+        private async Task SaveChecklistAsync()
+        {
+            var updatedChecklist = SelectedActivityChecklist
+                .Where(item => item.IsSelected)
+                .Select(c => c.Name)
+                .ToList();
+
+            await _firestoreService.SaveSelectedItemsAsync(_userId, updatedChecklist);
+        }
     }
 }

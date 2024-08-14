@@ -22,6 +22,11 @@
         </CollectionView.ItemTemplate>
     </CollectionView>
 
+        <Button Text="Save" 
+                BackgroundColor="Green" 
+                TextColor="White" 
+                Command="{Binding SaveChecklistCommand}" />
+
         <Button Text="Sign Out" 
                 BackgroundColor="Red" 
                 TextColor="White" 
