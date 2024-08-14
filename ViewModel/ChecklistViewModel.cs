@@ -82,15 +82,60 @@ namespace TravelBuddy.ViewModel
             Items.Clear();
 
 
-            if (activityType == "Hiking")
+            switch (activityType)
             {
-                var hiking = new Hiking();
-                foreach (var item in hiking.Items)
-                {
-                    Items.Add(new ChecklistItem { Name = item, IsSelected = false });
-                }
+                case "Hiking":
+                    var hiking = new Hiking();
+                    foreach (var item in hiking.Items)
+                    {
+                        Items.Add(new ChecklistItem { Name = item, IsSelected = false });
+                    }
+                    break;
+
+                case "Camping":
+                    var camping = new Camping();
+                    foreach (var item in camping.Items)
+                    {
+                        Items.Add(new ChecklistItem { Name = item, IsSelected = false });
+                    }
+                    break;
+
+                case "Beach":
+                    var beach = new Beach();
+                    foreach (var item in beach.Items)
+                    {
+                        Items.Add(new ChecklistItem { Name = item, IsSelected = false });
+                    }
+                    break;
+
+                case "Skiing":
+                    var skiing = new Skiing();
+                    foreach (var item in skiing.Items)
+                    {
+                        Items.Add(new ChecklistItem { Name = item, IsSelected = false });
+                    }
+                    break;
+
+                case "Road_Trip":
+                    var roadTrip = new RoadTrip();
+                    foreach (var item in roadTrip.Items)
+                    {
+                        Items.Add(new ChecklistItem { Name = item, IsSelected = false });
+                    }
+                    break;
+
+                case "Cycling":
+                    var cycling = new Cycling();
+                    foreach (var item in cycling.Items)
+                    {
+                        Items.Add(new ChecklistItem { Name = item, IsSelected = false });
+                    }
+                    break;
+
+                default:
+                    // Optionally handle an unknown activity type
+                    break;
             }
-            // Add logic for other activities
         }
 
         private async void OnSaveClicked()

@@ -102,13 +102,17 @@ namespace TravelBuddy.ViewModel
             switch (SelectedActivityIndex)
             {
                 case 0:
-                    return "Swimming";
-                case 1:
-                    return "Canoeing";
-                case 2:
-                    return "Camping";
-                case 3:
                     return "Hiking";
+                case 1:
+                    return "Camping";
+                case 2:
+                    return "Beach";
+                case 3:
+                    return "Skiing";
+                case 4:
+                    return "Road Trip";
+                case 5:
+                    return "Cycling";
                 default:
                     return null;
             }

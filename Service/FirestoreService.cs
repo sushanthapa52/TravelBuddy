@@ -54,12 +54,18 @@ namespace TravelBuddy.Service
             _firebaseClient = new FirebaseClient("https://travelmate-7ee8e-default-rtdb.firebaseio.com/");
         }
 
-        public async Task<UserActivity> GetUserActivityAsync(string userId)
+        public async Task<string> GetUserActivityTypeAsync(string userId)
         {
-            return null;
+            var activityType = await _firebaseClient
+                .Child("UserActivities")
+                .Child(userId)
+                .Child("ActivityType")
+                .OnceSingleAsync<string>(); // Assuming ActivityType is stored as a string
+
+            return activityType;
         }
 
-        
+
 
         public async Task SaveUserActivityAsync(string userId, UserActivity activity)
         {

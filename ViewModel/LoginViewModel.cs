@@ -72,8 +72,10 @@ namespace TravelBuddy.ViewModel
                 //    { "token", token },
                 //    { "checklist", userChecklist }
                 //};
-               // await Shell.Current.GoToAsync($"///{nameof(ExistingChecklistPage)}", navigationParameters);
-                await Shell.Current.GoToAsync($"///{nameof(ExistingChecklistPage)}");
+                // await Shell.Current.GoToAsync($"///{nameof(ExistingChecklistPage)}", navigationParameters);
+                var activityType = await _firestoreService.GetUserActivityTypeAsync(token);
+
+                await Shell.Current.GoToAsync($"///{nameof(ExistingChecklistPage)}?userId={token}&activityType={activityType}");
 
 
             }

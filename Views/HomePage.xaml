@@ -53,11 +53,13 @@
                             BackgroundColor="White"
                             HeightRequest="40">
                         <Picker.Items>
-                            <x:String>Swimming</x:String>
-                            <x:String>Canoeing</x:String>
-                            <x:String>Camping</x:String>
                             <x:String>Hiking</x:String>
+                            <x:String>Camping</x:String>
+                            <x:String>Beach</x:String>
+                            <x:String>Skiing</x:String>
+                            <x:String>Cycling</x:String>
                         </Picker.Items>
+
                     </Picker>
                 </StackLayout>
             </Frame>

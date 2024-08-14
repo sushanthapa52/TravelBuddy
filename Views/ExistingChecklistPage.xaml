@@ -9,15 +9,23 @@
     <ContentPage.BindingContext>
         <vm:ExistingChecklistVIewModel />
     </ContentPage.BindingContext>
+    <StackLayout Padding="20">
 
-    <CollectionView ItemsSource="{Binding SelectedActivityChecklist}">
+        <CollectionView ItemsSource="{Binding SelectedActivityChecklist}">
         <CollectionView.ItemTemplate>
             <DataTemplate>
                 <StackLayout Orientation="Horizontal">
-                    <CheckBox IsChecked="{Binding IsSelected}" />
                     <Label Text="{Binding Name}" />
+                    <Switch IsToggled="{Binding IsSelected}" VerticalOptions="Center" />
                 </StackLayout>
             </DataTemplate>
         </CollectionView.ItemTemplate>
     </CollectionView>
+
+        <Button Text="Sign Out" 
+                BackgroundColor="Red" 
+                TextColor="White" 
+                Command="{Binding SignOutCommand}" />
+    </StackLayout>
+
 </ContentPage>
