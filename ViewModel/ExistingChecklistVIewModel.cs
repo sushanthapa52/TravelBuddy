@@ -19,10 +19,12 @@ namespace TravelBuddy.ViewModel
         private readonly FirestoreService _firestoreService;
         private string _userId;
         private ExistingChecklistVIewModel _viewModel;
-        public string TripName;
-        public DateTime TripDate;
-        public string ActivityType;
+        //public string TripName;
+        //public DateTime TripDate;
+        //public string ActivityType;
         private string _token;
+
+
 
 
         public ObservableCollection<ChecklistItem> SelectedActivityChecklist { get; set; }
@@ -45,6 +47,28 @@ namespace TravelBuddy.ViewModel
         public ICommand SignOutCommand { get; }
         public ICommand SaveChecklistCommand { get; }
 
+        private string _tripName;
+        private string _tripDate;
+        private string _activityType;
+
+        public string TripName
+        {
+            get => _tripName;
+            set => SetProperty(ref _tripName, value);
+        }
+
+        public string TripDate
+        {
+            get => _tripDate;
+            set => SetProperty(ref _tripDate, value);
+        }
+
+        public string ActivityType
+        {
+            get => _activityType;
+            set => SetProperty(ref _activityType, value);
+        }
+
 
         public void ApplyQueryAttributes(IDictionary<string, object> query)
         {
@@ -63,9 +87,18 @@ namespace TravelBuddy.ViewModel
                 ActivityType = query["activityType"] as string ?? string.Empty;
             }
 
-            if (query.ContainsKey("tripDate") && DateTime.TryParse(query["tripDate"] as string, out DateTime parsedDate))
+            if (query.ContainsKey("tripDate"))
             {
-                TripDate = parsedDate;
+                var encodedDate = query["tripDate"] as string;
+
+                // Decode the URL-encoded string
+                var decodedDate = Uri.UnescapeDataString(encodedDate);
+
+                // Parse the date and extract only the date portion
+                if (DateTime.TryParse(decodedDate, out DateTime parsedDate))
+                {
+                    TripDate = parsedDate.ToString("M/d/yyyy"); // Format as "8/11/2024"
+                }
             }
 
             if (!string.IsNullOrEmpty(_token))

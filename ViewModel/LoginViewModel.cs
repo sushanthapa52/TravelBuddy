@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -19,6 +20,9 @@ namespace TravelBuddy.ViewModel
         private readonly FirestoreService _firestoreService;
         private readonly FirebaseAuthentication _authService;
 
+        private string TripName;
+        private string ActivityType;
+        private string TripDate;
 
         public LoginViewModel(FirebaseAuthentication authService, FirestoreService firestoreService)
         {
@@ -63,19 +67,23 @@ namespace TravelBuddy.ViewModel
 
             // Check if the user has a checklist in the database
             var userChecklist = await _firestoreService.GetUserChecklistAsync(token);
+            //var tripName = await _firestoreService.GetTripNameAsync(token);
+
+
 
             if (userChecklist != null)
             {
-                // Redirect to the ChecklistPage with the checklist data
-                //var navigationParameters = new Dictionary<string, object>
-                //{
-                //    { "token", token },
-                //    { "checklist", userChecklist }
-                //};
-                // await Shell.Current.GoToAsync($"///{nameof(ExistingChecklistPage)}", navigationParameters);
-                var activityType = await _firestoreService.GetUserActivityTypeAsync(token);
+                var userActivity = await _firestoreService.GetUserActivityAsync(token);
+                if (userActivity != null)
+                {
+                    TripName = userActivity.TripName;
+                    ActivityType = userActivity.ActivityType;
+                    TripDate = userActivity.ActivityDate.ToString();
 
-                await Shell.Current.GoToAsync($"///{nameof(ExistingChecklistPage)}?userId={token}&activityType={activityType}");
+                    // Load the checklist based on the activity type
+                }
+
+                await Shell.Current.GoToAsync($"///{nameof(ExistingChecklistPage)}?userId={token}&activityType={ActivityType}&tripName={TripName}&tripDate={TripDate}");
 
 
             }

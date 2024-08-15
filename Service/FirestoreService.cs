@@ -76,6 +76,15 @@ namespace TravelBuddy.Service
 
 
         }
+        public async Task<UserActivity> GetUserActivityAsync(string userId)
+        {
+            var userActivity = await _firebaseClient
+                .Child("UserActivities")
+                .Child(userId)
+                .OnceSingleAsync<UserActivity>();
+
+            return userActivity;
+        }
         public async Task SaveSelectedItemsAsync(string userId, List<string> selectedItems)
         {
             await _firebaseClient
@@ -106,9 +115,21 @@ namespace TravelBuddy.Service
 
             return result;
         }
+        public async Task<string> GetTripNameAsync(string userId)
+        {
+            // Retrieve the trip name for the specified userId from the UserActivities node
+            var tripName = await _firebaseClient
+                .Child("UserActivities")
+                .Child(userId)
+                .Child("TripName")
+                .OnceSingleAsync<string>(); // Assuming TripName is stored as a string
+
+            return tripName;
+        }
 
 
     }
+
 
     public class UserActivity
     {
