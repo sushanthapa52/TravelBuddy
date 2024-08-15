@@ -64,44 +64,40 @@ namespace TravelBuddy.ViewModel
         {
             var token = await _authService.LoginWithEmailPassword(Email, Password);
 
-
-            // Check if the user has a checklist in the database
-            //var tripName = await _firestoreService.GetTripNameAsync(token);
-
+            // Check if the user has activity and checklist in the database
             var userActivity = await _firestoreService.GetUserActivityAsync(token);
-            if (userActivity == null && token is not null) {
+            if (userActivity == null && token != null)
+            {
                 await Shell.Current.GoToAsync($"///{nameof(HomePage)}?token={token}");
-
             }
-
-
-            if (userActivity != null)
+            else if (userActivity != null)
             {
                 var userChecklist = await _firestoreService.GetUserChecklistAsync(token);
 
                 if (userChecklist != null)
                 {
+                    // Set the required data for navigation
                     TripName = userActivity.TripName;
                     ActivityType = userActivity.ActivityType;
-                    TripDate = userActivity.ActivityDate.ToString();
+                    TripDate = userActivity.ActivityDate.ToString("MM/dd/yyyy"); // Format date as required
 
+                    // Navigate to ExistingChecklistPage with the necessary query parameters
                     await Shell.Current.GoToAsync($"///{nameof(ExistingChecklistPage)}?userId={token}&activityType={ActivityType}&tripName={TripName}&tripDate={TripDate}");
-
-
-                    // Load the checklist based on the activity type
                 }
-                await Shell.Current.GoToAsync($"///{nameof(HomePage)}?token={token}");
-
-
+                else
+                {
+                    // If the user has no checklist, navigate to HomePage
+                    await Shell.Current.GoToAsync($"///{nameof(HomePage)}?token={token}");
+                }
             }
             else
             {
+                // Navigate to HomePage as a fallback
                 await Shell.Current.GoToAsync($"///{nameof(HomePage)}?token={token}");
-
             }
-
-
         }
+
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 
