@@ -5,6 +5,9 @@ using Microsoft.Extensions.Logging;
 using TravelBuddy.ViewModel;
 using TravelBuddy.Service;
 using TravelBuddy.Views;
+using Twilio.Types;
+using Twilio.Rest.Api.V2010.Account;
+using Twilio;
 
 namespace TravelBuddy
 {
@@ -34,6 +37,8 @@ namespace TravelBuddy
                 },
                 //UserRepository = services.GetRequiredService<IUserRepository>()
             }));
+            TwilioClient.Init("ACb8a18eeb1bd174bfdd2df741f542e2d4", "ce2c0dce7eb59a4320c124a09bb71a4d");
+
             builder.Services.AddSingleton<FirebaseAuthentication>();
             builder.Services.AddTransient<LoginViewModel>();
             builder.Services.AddTransient<HomePageViewModel>();
@@ -45,7 +50,6 @@ namespace TravelBuddy
             builder.Services.AddTransient<ExistingChecklistPage>();
 
            builder.Services.AddSingleton<FirestoreService>();
-           
             return builder.Build();
         }
     }

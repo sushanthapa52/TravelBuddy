@@ -172,6 +172,8 @@ namespace TravelBuddy.ViewModel
             var userId = _token; // Replace with the actual user ID
             await _firestoreService.SaveSelectedItemsAsync(userId, selectedItems);
 
+            TwilioSendMessage.SendMessage("Items has been successfully added to your Trip essentials.");
+
             await Application.Current.MainPage.DisplayAlert("Success", "Checklist saved successfully!", "OK");
         }
         private async void OnSignOutClicked()
