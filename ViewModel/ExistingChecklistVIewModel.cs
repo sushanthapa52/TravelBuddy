@@ -19,9 +19,7 @@ namespace TravelBuddy.ViewModel
         private readonly FirestoreService _firestoreService;
         private string _userId;
         private ExistingChecklistVIewModel _viewModel;
-        //public string TripName;
-        //public DateTime TripDate;
-        //public string ActivityType;
+
         private string _token;
 
 
@@ -79,12 +77,12 @@ namespace TravelBuddy.ViewModel
 
             if (query.ContainsKey("tripName"))
             {
-                TripName = query["tripName"] as string;
+                TripName = Uri.UnescapeDataString(query["tripName"] as string);
             }
 
             if (query.ContainsKey("activityType"))
             {
-                ActivityType = query["activityType"] as string ?? string.Empty;
+                ActivityType = Uri.UnescapeDataString(query["activityType"] as string) ?? string.Empty;
             }
 
             if (query.ContainsKey("tripDate"))

@@ -66,24 +66,31 @@ namespace TravelBuddy.ViewModel
 
 
             // Check if the user has a checklist in the database
-            var userChecklist = await _firestoreService.GetUserChecklistAsync(token);
             //var tripName = await _firestoreService.GetTripNameAsync(token);
 
+            var userActivity = await _firestoreService.GetUserActivityAsync(token);
+            if (userActivity == null && token is not null) {
+                await Shell.Current.GoToAsync($"///{nameof(HomePage)}?token={token}");
+
+            }
 
 
-            if (userChecklist != null)
+            if (userActivity != null)
             {
-                var userActivity = await _firestoreService.GetUserActivityAsync(token);
-                if (userActivity != null)
+                var userChecklist = await _firestoreService.GetUserChecklistAsync(token);
+
+                if (userChecklist != null)
                 {
                     TripName = userActivity.TripName;
                     ActivityType = userActivity.ActivityType;
                     TripDate = userActivity.ActivityDate.ToString();
 
+                    await Shell.Current.GoToAsync($"///{nameof(ExistingChecklistPage)}?userId={token}&activityType={ActivityType}&tripName={TripName}&tripDate={TripDate}");
+
+
                     // Load the checklist based on the activity type
                 }
-
-                await Shell.Current.GoToAsync($"///{nameof(ExistingChecklistPage)}?userId={token}&activityType={ActivityType}&tripName={TripName}&tripDate={TripDate}");
+                await Shell.Current.GoToAsync($"///{nameof(HomePage)}?token={token}");
 
 
             }
@@ -92,7 +99,8 @@ namespace TravelBuddy.ViewModel
                 await Shell.Current.GoToAsync($"///{nameof(HomePage)}?token={token}");
 
             }
-            
+
+
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

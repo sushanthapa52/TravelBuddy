@@ -81,7 +81,8 @@ namespace TravelBuddy.ViewModel
                 await _firestoreService.SaveUserActivityAsync(userId, tripDetails);
                 await Application.Current.MainPage.DisplayAlert("Success", "Trip details saved successfully!", "OK");
                 // redirect into new page listing all the details
-                await Shell.Current.GoToAsync($"///ChecklistPage?userId={userId}&tripName={TripName}&tripDate={TripDate}&activityType={activity}");
+                var userActivityDetails = await _firestoreService.GetUserActivityAsync(userId);
+                await Shell.Current.GoToAsync($"///ChecklistPage?userId={userId}&tripName={TripName}&tripDate={userActivityDetails.ActivityDate.ToString()}&activityType={activity}");
 
             }
             catch (Exception ex)

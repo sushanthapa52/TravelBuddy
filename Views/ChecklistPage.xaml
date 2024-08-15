@@ -3,37 +3,70 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TravelBuddy.Views.ChecklistPage"
              xmlns:vm="clr-namespace:TravelBuddy.ViewModel"
-             Title="ChecklistPage">
+             Title="Checklist Page"
+             BackgroundColor="White">
+
     <ContentPage.BindingContext>
         <vm:ChecklistViewModel />
     </ContentPage.BindingContext>
 
-    <StackLayout Padding="20">
-        <Label Text="{Binding TripName}" FontSize="24" FontAttributes="Bold" />
-        <Label Text="{Binding TripDate}" FontSize="24" FontAttributes="Bold" />
-        <Label Text="{Binding ActivityType}" FontSize="24" FontAttributes="Bold" />
+    <ScrollView>
+        <StackLayout Padding="20" Spacing="10">
+            <!-- Header -->
+            <StackLayout HorizontalOptions="Center" Padding="0, 20, 0, 20">
+                <Label Text="{Binding TripName}" 
+                       FontSize="28" 
+                       FontAttributes="Bold" 
+                       HorizontalOptions="Center" 
+                       TextColor="DarkBlue" />
 
+                <Label Text="{Binding ActivityType}" 
+                       FontSize="22" 
+                       FontAttributes="Italic" 
+                       HorizontalOptions="Center" 
+                       TextColor="Gray" />
 
+                <Label Text="{Binding TripDate, StringFormat='Date: {0:MMMM dd, yyyy}'}" 
+                       FontSize="18" 
+                       FontAttributes="Bold" 
+                       HorizontalOptions="Center" 
+                       TextColor="DarkSlateGray" />
+            </StackLayout>
 
-        <ListView ItemsSource="{Binding Items}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <StackLayout Orientation="Horizontal" Padding="10">
-                            <Label Text="{Binding Name}" VerticalOptions="Center" />
-                            <Switch IsToggled="{Binding IsSelected}" VerticalOptions="Center" />
+            <!-- Checklist -->
+            <CollectionView ItemsSource="{Binding Items}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Orientation="Horizontal" Padding="10, 5" Spacing="20">
+                            <Label Text="{Binding Name}" 
+                                   FontSize="16" 
+                                   TextColor="Black" 
+                                   VerticalOptions="Center" />
+                            <Switch IsToggled="{Binding IsSelected}" 
+                                    VerticalOptions="Center" />
                         </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
-        <Button Text="Save" Command="{Binding SaveCommand}" BackgroundColor="Blue" TextColor="White" />
+            <!-- Buttons -->
+            <Button Text="Save" 
+                    Command="{Binding SaveCommand}" 
+                    BackgroundColor="Green" 
+                    TextColor="White" 
+                    FontAttributes="Bold"
+                    CornerRadius="10"
+                    HorizontalOptions="FillAndExpand"
+                    Margin="0, 20" />
 
-        <!-- Sign Out Button -->
-        <Button Text="Sign Out" 
-                BackgroundColor="Red" 
-                TextColor="White" 
-                Command="{Binding SignOutCommand}" />
-    </StackLayout>
+            <Button Text="Sign Out" 
+                    Command="{Binding SignOutCommand}" 
+                    BackgroundColor="Red" 
+                    TextColor="White" 
+                    FontAttributes="Bold"
+                    CornerRadius="10"
+                    HorizontalOptions="FillAndExpand" />
+        </StackLayout>
+    </ScrollView>
+
 </ContentPage>
